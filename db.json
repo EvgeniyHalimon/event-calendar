@@ -1,8 +1,8 @@
 {
     "users": [
-      { "id": 1, "title": "json-server", "author": "typicode" }
+      { "id": 1, "username": "Lalo", "password": "1234" }
     ],
     "events": [
-      { "id": 1, "body": "some comment", "postId": 1 }
+      { "id": 1, "eventName": "some event", "startDate": "20/10/22", "endDate": "22/10/22" }
     ]
 }
