@@ -1,12 +1,13 @@
-import { Inter } from '@next/font/google';
 import { NextPage } from 'next';
 
-const inter = Inter({ subsets: ['latin'] });
+import MonthPicker from '@/components/Calendar/MonthPicker';
+import MonthlyViewList from '@/components/Calendar/MonthlyViewList';
 
 const Calendar:NextPage = () => {
   return (
     <>
-      Calendar
+      <MonthPicker />
+      <MonthlyViewList />
     </>
   );
 };
