@@ -1,0 +1,16 @@
+.userBlock{
+    padding: 10px 20px;
+
+    &-buttons{
+        margin: 0 10;
+
+        button{
+            margin-right: 10px;
+        }
+    }
+}
+
+.userItem{
+    display: flex;
+    border: 1px solid red;
+}

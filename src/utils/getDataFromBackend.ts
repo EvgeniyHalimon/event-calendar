@@ -1,23 +1,23 @@
 import axios from 'axios';
 
-const BASE_URL = '';
+axios.defaults.baseURL = ' http://localhost:3001/'
 
 const axiosInstance = () => {
   return axios;
 }
 
 export const getDataFromBackend: any = (url: string) => {
-  return axiosInstance().get(`${BASE_URL}${url}`);
+  return axiosInstance().get(`${url}`);
 };
 
 export const postDataToBackend: any = (url: string, data: any) => {
-  return axiosInstance().post(`${BASE_URL}${url}`, data);
+  return axiosInstance().post(`${url}`, data);
 };
 
 export const putDataToBackend: any = (url: string, data: any) => {
-  return axiosInstance().put(`${BASE_URL}${url}`, data);
+  return axiosInstance().put(`${url}`, data);
 };
 
 export const deleteDataFromBackend: any = (url: string) => {
-  return axiosInstance().delete(`${BASE_URL}${url}`);
+  return axiosInstance().delete(`${url}`);
 };
