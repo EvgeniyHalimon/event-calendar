@@ -9,7 +9,7 @@ const initialState: IAppContext = {
   setYear: null,
   number: 0, 
   setNumber: null,
-  events: [{ id: 0, eventName: '', startDate: '', endDate: '' }],
+  events: [{ id: 0, eventName: '', eventDate: '' }],
   setEvents: null,
 };
 
