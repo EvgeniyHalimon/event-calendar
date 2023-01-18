@@ -1,11 +1,14 @@
 import { CssBaseline } from '@mui/material';
 import { AppProps } from 'next/app';
-import { useMemo, useState } from 'react';
+import { FC, PropsWithChildren, useMemo, useState } from 'react';
 
 import AppContext from '@/components/Context/Context';
 import '@/styles/globals.scss';
 
+const Noop: FC = ({ children }: PropsWithChildren<{}>) => <>{children}</>;
+
 export default function App({ Component, pageProps }: AppProps) {
+  const Layout = (Component as any).Layout || Noop;
   const d = new Date();
   const m = d.getMonth();
   const y = d.getFullYear();
@@ -22,8 +25,10 @@ export default function App({ Component, pageProps }: AppProps) {
     <AppContext.Provider
       value={AppContextValue}    
     >
-      <CssBaseline />
-      <Component {...pageProps} />
+      <Layout>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </Layout>
     </AppContext.Provider>
   );
 }
