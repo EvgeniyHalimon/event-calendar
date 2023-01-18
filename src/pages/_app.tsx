@@ -16,10 +16,9 @@ export default function App({ Component, pageProps }: AppProps) {
   const [year, setYear] = useState(y);
   const [number, setNumber] = useState<number>(0);
   const [events, setEvents] = useState<any>([]);
-  const [rangeOfEvents, setRangeOfEvent] = useState([]);
 
   const AppContextValue = useMemo(() => 
-    ({ month, setMonth, year, setYear, number, setNumber }), [month, year, number]);
+    ({ month, setMonth, year, setYear, number, setNumber, events, setEvents }), [month, year, number]);
 
   return (
     <AppContext.Provider

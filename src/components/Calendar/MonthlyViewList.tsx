@@ -1,13 +1,16 @@
 import { Box } from '@mui/material';
 
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
-import styles from '../Calendar/Calendar.module.scss';
+
 
 import AppContext from '../Context/Context';
 
 import Day from './Day';
 import { useDate } from './hooks/useDate';
+import { IDaysTypes } from '@/types/types';
+import { getDataFromBackend } from '@/utils/getDataFromBackend';
+import styles from '../Calendar/Calendar.module.scss';
 
 interface IDays{
   shortName: string,
@@ -28,6 +31,19 @@ const MonthlyViewList = () => {
   const { number } = useContext(AppContext);
   const { days } = useDate(number);
 
+  const {events, setEvents} = useContext(AppContext)
+  const [monthEvents, setMonthEvents] = useState(events)
+
+  const getEvents = async() => {
+    const eventsData = await getDataFromBackend('events')
+    setMonthEvents(eventsData.data)
+    setEvents(eventsData.data)
+  }
+
+  useEffect(() => {
+    getEvents()
+  }, [events.length])
+
   return(
     <Box>
       <Box className={`${styles.firstBlock} ${styles.daysBox}`}>
@@ -42,14 +58,17 @@ const MonthlyViewList = () => {
         )}
       </Box>
       <Box className={styles.secondBlock}>
-        {days.map((d: any, index: number) => 
+        {days.map((day: IDaysTypes, index: number) => 
           <>
-            {d.value === 'padding' ?
-              <Day date={d.dayNum} key={index}
+            {day.value === 'padding' ?
+              <Day 
+                key={index}
+                date={day}
                 cardClass={styles.cardBackground}
-                textClass={styles.disText}            
+                events={monthEvents}  
+                setEvents={setMonthEvents}      
               /> :
-              <Day date={d.dayNum} key={index} />}
+              <Day date={day} key={index} events={monthEvents} setEvents={setMonthEvents}/>}
           </>
         )}
       </Box>

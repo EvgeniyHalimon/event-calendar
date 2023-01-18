@@ -7,8 +7,7 @@ export interface IUsers{
 export interface IEvents{
     id: number,
     eventName: string,
-    startDate: string,
-    endDate: string
+    eventDate: string,
 }
 
 export interface IAppContext{
@@ -18,4 +17,12 @@ export interface IAppContext{
     setYear: any,
     number: number, 
     setNumber: any,
+    events: IEvents[], 
+    setEvents: any
+}
+
+export interface IDaysTypes{
+    value: number | string,
+    date: string, 
+    dayNum: number | string,
 }

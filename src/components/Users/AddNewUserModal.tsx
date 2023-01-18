@@ -31,7 +31,7 @@ const AddNewUserModal:FC<IAddNewUserModal> = ({ users, setUsers }) => {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen} sx={{marginBottom: '10px'}}>
         Add new user
       </Button>
       <Dialog open={open} onClose={handleClose}>

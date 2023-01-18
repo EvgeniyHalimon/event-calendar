@@ -21,7 +21,6 @@ const Layout:FC<ILayout> = ({ children }) => {
                 Calendar
             </Link>
           </Box>
-          <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
       <Box>

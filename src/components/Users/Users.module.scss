@@ -19,4 +19,17 @@
     border-radius: 15px;
     background: rgb(250,250,250);
     background: linear-gradient(180deg, rgba(250,250,250,1) 0%, rgba(157,144,144,0.8519782913165266) 100%);
+    justify-content: space-between;
+
+    & p{
+        margin-right: 15px;
+    }
+}
+
+.buttonBlock button{
+    margin-right: 10px;
+}
+
+.buttonBlock button:last-child{
+    margin-right: 10px;
 }

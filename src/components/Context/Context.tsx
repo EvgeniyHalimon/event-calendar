@@ -9,6 +9,8 @@ const initialState: IAppContext = {
   setYear: null,
   number: 0, 
   setNumber: null,
+  events: [{ id: 0, eventName: '', startDate: '', endDate: ''}],
+  setEvents: null
 };
 
 const AppContext = createContext<IAppContext>(initialState);

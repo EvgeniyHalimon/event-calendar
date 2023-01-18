@@ -39,13 +39,14 @@ const UserInfo:FC<IUserInfo> = ({ user, users, setUsers }) => {
     });
     setUsers(updatedUsersArray);
   };
+
   return (
     <div className={styles.userItem}>
       {isEditing ? 
         <input value={username} ref={inputRef} onChange={handleChange}/> : 
         <p>{user.username}</p>
       }
-      <div>
+      <div className={styles.buttonBlock}>
         {isEditing ? 
           <button onClick={() => handlePut(user)}>save</button> : 
           <button onClick={() => handleEdit(user.username)}>edit</button>
