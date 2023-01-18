@@ -4,15 +4,17 @@ import { FC, useState } from 'react';
 
 import { IDaysTypes, IEvents } from '@/types/types';
 import { postDataToBackend } from '@/utils/getDataFromBackend';
+
 import styles from '../Calendar/Calendar.module.scss';
 
 interface IAddNewUserModal{
   date: IDaysTypes,
   events: IEvents[],
-  setNewEvents: any
+  setNewEvents: any,
+  getEvent: any
 }
 
-const AddNewEventModal:FC<IAddNewUserModal> = ({ date, events, setNewEvents }) => {
+const AddNewEventModal:FC<IAddNewUserModal> = ({ date, events, setNewEvents, getEvent }) => {
   const [open, setOpen] = useState(false);
   const [newEvent, setNewEvent] = useState({ eventName: '', eventDate: date.date });
 
@@ -29,7 +31,8 @@ const AddNewEventModal:FC<IAddNewUserModal> = ({ date, events, setNewEvents }) =
     await postDataToBackend('events', newEvent);
     setOpen(false);
     setNewEvents([...events, newEvent]);
-    setNewEvent({ eventName: '', eventDate: '' });
+    setNewEvent({ eventName: '', eventDate: date.date });
+    getEvent();
   };
 
   return (

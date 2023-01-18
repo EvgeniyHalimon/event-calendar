@@ -2,7 +2,8 @@ import { NextPage } from 'next';
 
 import Layout from '@/components/Layout/Layout';
 import UsersList from '@/components/Users/Users';
-import styles from '../styles/Home.module.scss'
+
+import styles from '../styles/Home.module.scss';
 
 const Users: NextPage & { Layout: any } = () => {
   return (

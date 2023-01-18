@@ -1,8 +1,8 @@
-import { Box, AppBar, Toolbar, Button } from '@mui/material';
+import { Box, AppBar, Toolbar } from '@mui/material';
 import Link from 'next/link';
 import { FC, ReactNode } from 'react';
 
-import styles from '../Layout/Layout.module.scss'
+import styles from '../Layout/Layout.module.scss';
 
 interface ILayout{
     children: ReactNode

@@ -1,20 +1,24 @@
 import { Box } from '@mui/material';
-import { FC, useRef, useContext, useState } from 'react';
+import { FC, useRef, useState } from 'react';
+
+import { IDaysTypes, IEvents } from '@/types/types';
+
+import { deleteDataFromBackend, putDataToBackend } from '@/utils/getDataFromBackend';
 
 import styles from '../Calendar/Calendar.module.scss';
-import { IDaysTypes, IEvents } from '@/types/types';
-import AppContext from '../Context/Context';
-import { deleteDataFromBackend, getDataFromBackend, putDataToBackend } from '@/utils/getDataFromBackend';
+
+
 import AddNewEventModal from './AddNewEventModal';
 
 interface IDateCard{
   date : IDaysTypes,
   events: IEvents[],
   setEvents: any,
+  getEvent: any
   cardClass?: string,
 }
 
-const Day: FC<IDateCard> = ({ date, events, setEvents, cardClass }) => {
+const Day: FC<IDateCard> = ({ date, events, setEvents, getEvent, cardClass }) => {
   const [eventname, setEventname] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef<any>(null);
@@ -24,13 +28,12 @@ const Day: FC<IDateCard> = ({ date, events, setEvents, cardClass }) => {
   };
 
   const handleDelete = async(event: IEvents) => {
-    console.log("🚀 ~ file: Day.tsx:28 ~ handleDelete ~ event", event.id)
-    await deleteDataFromBackend(`events/${event.id}`)
+    await deleteDataFromBackend(`events/${event.id}`);
     const updatedEvents = events.filter((evt: IEvents) => {
-      return evt.id !== event.id
-    })
-    setEvents(updatedEvents)
-  }
+      return evt.id !== event.id;
+    });
+    setEvents(updatedEvents);
+  };
 
   const handleEdit = (event: string) => {
     setIsEditing(!isEditing);
@@ -49,25 +52,25 @@ const Day: FC<IDateCard> = ({ date, events, setEvents, cardClass }) => {
   return(
     <div className={`${styles.calendarDate} ${styles.calendarDayStat} ${cardClass}`}>
       <Box className={`${styles.calendarInnerBox}`}>
-        <AddNewEventModal date={date} events={events} setNewEvents={setEvents}/>
+        <AddNewEventModal date={date} events={events} setNewEvents={setEvents} getEvent={getEvent}/>
       </Box>
-      <Box className={styles.calendarInnerBox}>
+      <Box>
         {events?.map((event: IEvents) => {
           return date.date === event.eventDate ? 
-          <>
-            {isEditing ? 
-              <input value={eventname} ref={inputRef} onChange={handleChange}/> : 
-              <p>{event.eventName}</p>
-            }
-            {isEditing ? 
-              <button id={styles.saveButton} onClick={() => handlePut(event)}>save</button> :
-              <div>
-                <button onClick={() => handleEdit(event.eventName)}>e</button> 
-                <button onClick={() => handleDelete(event)}>x</button>
-              </div>
-            }
-          </>
-          : null
+            <div className={styles.calendarInnerBox} key={event.id}>
+              {isEditing ? 
+                <input value={eventname} ref={inputRef} onChange={handleChange}/> : 
+                <p>{event.eventName}</p>
+              }
+              {isEditing ? 
+                <button id={styles.saveButton} onClick={() => handlePut(event)}>save</button> :
+                <div>
+                  <button onClick={() => handleEdit(event.eventName)}>e</button> 
+                  <button onClick={() => handleDelete(event)}>x</button>
+                </div>
+              }
+            </div>
+            : null;
         })}
       </Box>
     </div>

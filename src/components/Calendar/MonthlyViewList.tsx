@@ -4,13 +4,16 @@ import { useContext, useEffect, useState } from 'react';
 
 
 
+import { IDaysTypes } from '@/types/types';
+
+import { getDataFromBackend } from '@/utils/getDataFromBackend';
+
+import styles from '../Calendar/Calendar.module.scss';
 import AppContext from '../Context/Context';
 
 import Day from './Day';
 import { useDate } from './hooks/useDate';
-import { IDaysTypes } from '@/types/types';
-import { getDataFromBackend } from '@/utils/getDataFromBackend';
-import styles from '../Calendar/Calendar.module.scss';
+
 
 interface IDays{
   shortName: string,
@@ -31,18 +34,18 @@ const MonthlyViewList = () => {
   const { number } = useContext(AppContext);
   const { days } = useDate(number);
 
-  const {events, setEvents} = useContext(AppContext)
-  const [monthEvents, setMonthEvents] = useState(events)
+  const { events, setEvents } = useContext(AppContext);
+  const [monthEvents, setMonthEvents] = useState(events);
 
   const getEvents = async() => {
-    const eventsData = await getDataFromBackend('events')
-    setMonthEvents(eventsData.data)
-    setEvents(eventsData.data)
-  }
+    const eventsData = await getDataFromBackend('events');
+    setMonthEvents(eventsData.data);
+    setEvents(eventsData.data);
+  };
 
   useEffect(() => {
-    getEvents()
-  }, [events.length])
+    getEvents();
+  }, []);
 
   return(
     <Box>
@@ -66,9 +69,10 @@ const MonthlyViewList = () => {
                 date={day}
                 cardClass={styles.cardBackground}
                 events={monthEvents}  
-                setEvents={setMonthEvents}      
+                setEvents={setMonthEvents}
+                getEvent={getEvents}     
               /> :
-              <Day date={day} key={index} events={monthEvents} setEvents={setMonthEvents}/>}
+              <Day date={day} key={index} events={monthEvents} setEvents={setMonthEvents} getEvent={getEvents}/>}
           </>
         )}
       </Box>
