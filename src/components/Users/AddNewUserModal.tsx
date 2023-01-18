@@ -1,16 +1,18 @@
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+
+import { FC, useState } from 'react';
+
 import { IUsers } from '@/types/types';
 import { postDataToBackend } from '@/utils/getDataFromBackend';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-import { FC, useState } from 'react';
 
 interface IAddNewUserModal{
     users: IUsers[]
     setUsers: any
 }
 
-const AddNewUserModal:FC<IAddNewUserModal> = ({users, setUsers}) => {
+const AddNewUserModal:FC<IAddNewUserModal> = ({ users, setUsers }) => {
   const [open, setOpen] = useState(false);
-  const [newUser, setNewUser] = useState({username: '', password: ''});
+  const [newUser, setNewUser] = useState({ username: '', password: '' });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -18,14 +20,14 @@ const AddNewUserModal:FC<IAddNewUserModal> = ({users, setUsers}) => {
 
   const handleClose = () => {
     setOpen(false);
-    setNewUser({username: '', password: ''})
+    setNewUser({ username: '', password: '' });
   };
 
   const handleAddNewUser = async () => {
-    await postDataToBackend('users', newUser)
+    await postDataToBackend('users', newUser);
     setOpen(false);
-    setUsers([...users, newUser])
-  }
+    setUsers([...users, newUser]);
+  };
 
   return (
     <div>
@@ -43,7 +45,7 @@ const AddNewUserModal:FC<IAddNewUserModal> = ({users, setUsers}) => {
             fullWidth
             variant="standard"
             value={newUser.username}
-            onChange={(e) => setNewUser({...newUser, username: e.target.value})}
+            onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
           />
           <TextField
             margin="dense"
@@ -52,7 +54,7 @@ const AddNewUserModal:FC<IAddNewUserModal> = ({users, setUsers}) => {
             fullWidth
             variant="standard"
             value={newUser.password}
-            onChange={(e) => setNewUser({...newUser, password: e.target.value})}
+            onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
           />
         </DialogContent>
         <DialogActions>
@@ -62,6 +64,6 @@ const AddNewUserModal:FC<IAddNewUserModal> = ({users, setUsers}) => {
       </Dialog>
     </div>
   );
-}
+};
 
-export default AddNewUserModal
+export default AddNewUserModal;
