@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = ' http://localhost:3001/'
+axios.defaults.baseURL = ' http://localhost:3001/';
 
 const axiosInstance = () => {
   return axios;
-}
+};
 
 export const getDataFromBackend: any = (url: string) => {
   return axiosInstance().get(`${url}`);

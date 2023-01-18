@@ -54,7 +54,7 @@
 .pickerBlock{
     display: flex;
     align-items: center;
-    margin: 0 10px;
+    margin-bottom: 10px;
 }
 
 .iconButton{
@@ -74,6 +74,10 @@
 .arrow{
     height: 18px;
     width: 18px;
+}
+
+.days{
+    text-align: center;
 }
 
 //
